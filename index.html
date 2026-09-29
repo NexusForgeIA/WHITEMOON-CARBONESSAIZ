@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carbones Saiz · Leña y carbón en la Sierra de Madrid · Demo WhiteMoon</title>
+<meta name="description" content="Leña de encina, carbón vegetal, briquetas y pellets desde Collado Villalba. Reparto propio en Madrid y la Sierra y envíos paletizados a toda la Península. Más de 40 años de experiencia.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Carbones Saiz · Leña y carbón en la Sierra de Madrid">
+<meta property="og:description" content="Leña de encina, carbón vegetal, briquetas y pellets. Reparto en Madrid y la Sierra y envíos a toda la Península.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/webp" href="img/logo-carbones-saiz.webp">
+<link rel="preload" as="font" type="font/woff2" href="fonts/anton-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-var.woff2" crossorigin>
+<link rel="preload" as="image" href="img/flota.webp" fetchpriority="high">
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/anton-latin.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('fonts/inter-latin-var.woff2') format('woff2-variations'),url('fonts/inter-latin-var.woff2') format('woff2')}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0a09;
+  --bg2:#12100e;
+  --card:#181513;
+  --white:#f5f1ec;
+  --muted:#a59c92;
+  --acc:#e08a63;            /* brasa — derivado del #D7836A de su marca */
+  --acc-hover:#f09b72;
+  --acc2:#cbbba9;           /* ceniza/arena */
+  --ink:#1b0f09;            /* texto sobre el acento */
+  --border:rgba(245,241,236,.13);
+  --border2:rgba(245,241,236,.07);
+  --glow:rgba(224,138,99,.18);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;height:auto}
+::selection{background:var(--acc);color:var(--ink)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#2e2824;border-radius:3px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+
+/* DEMO STRIP */
+.demo-strip{background:var(--acc);text-align:center;padding:9px 16px;height:35px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);position:sticky;top:0;z-index:300}
+.demo-strip a{color:var(--ink);text-decoration:underline}
+
+/* PRELOADER */
+.preloader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease .2s}
+.preloader.hide{opacity:0;pointer-events:none}
+.pre-logo{animation:pre-pulse 1.2s ease-in-out infinite}
+.pre-logo img{width:clamp(180px,40vw,260px);height:auto}
+@keyframes pre-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.97)}}
+
+/* NAV */
+.nav{position:fixed;top:35px;left:0;right:0;z-index:200;display:flex;align-items:center;padding:16px 52px;transition:all .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(12,10,9,.92);backdrop-filter:blur(20px);border-bottom-color:var(--border)}
+.nav-logo img{width:160px;height:auto}
+.nav-links{display:flex;align-items:center;gap:36px;margin-left:auto;margin-right:32px}
+.nav-links a{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;color:var(--white)}
+.nav-links a:hover{color:var(--acc)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--acc);color:var(--ink);border-radius:40px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--acc-hover);transform:translateY(-1px)}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:130px 52px 72px}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.85) brightness(.75)}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;background:
+  radial-gradient(ellipse at 20% 95%,rgba(224,138,99,.22),transparent 55%),
+  linear-gradient(0deg,rgba(12,10,9,.98) 0%,rgba(12,10,9,.72) 45%,rgba(12,10,9,.35) 100%)}
+.hero-in{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--border);border-radius:40px;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc2);margin-bottom:22px;background:rgba(12,10,9,.45)}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:ember 2.2s infinite}
+@keyframes ember{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(2.6rem,7.4vw,6rem);line-height:.92;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:22px;text-wrap:balance}
+.hero h1 .acc{color:var(--acc)}
+.hero-sub{font-size:clamp(.95rem,1.4vw,1.12rem);color:rgba(245,241,236,.78);max-width:560px;margin-bottom:34px;line-height:1.7}
+.hero-cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 30px;background:var(--acc);color:var(--ink);border-radius:40px;font-size:.88rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s;font-family:inherit}
+.btn-primary:hover{background:var(--acc-hover);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 30px;background:rgba(12,10,9,.35);color:var(--white);border-radius:40px;font-size:.88rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid rgba(245,241,236,.28);cursor:pointer;transition:all .25s;font-family:inherit}
+.btn-outline:hover{border-color:var(--white);background:rgba(245,241,236,.06)}
+.btn-primary svg,.btn-outline svg{width:17px;height:17px;flex:0 0 auto}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap}
+.h-stat strong{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:2rem;color:var(--acc);display:block;line-height:1}
+.h-stat span{font-size:.72rem;color:var(--acc2);text-transform:uppercase;letter-spacing:.1em}
+
+/* MARQUEES */
+.marquee-wrap{overflow:hidden;background:var(--acc);padding:13px 0}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 32s linear infinite;width:max-content}
+.marquee-item{display:inline-flex;align-items:center;gap:14px;padding:0 22px;font-family:'Anton',Impact,sans-serif;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.marquee-item .sep{opacity:.45}
+.marquee-wrap2{overflow:hidden;background:#1b1714;padding:13px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.marquee-track2{display:flex;white-space:nowrap;animation:marquee 36s linear infinite;width:max-content}
+.marquee-item2{display:inline-flex;align-items:center;gap:14px;padding:0 22px;font-family:'Anton',Impact,sans-serif;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.marquee-item2 .sep{color:var(--acc)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION SHELL */
+.section-header{max-width:1200px;margin:0 auto 60px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.section-tag{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.section-title{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(2.2rem,4.5vw,4.5rem);line-height:.92;text-transform:uppercase;letter-spacing:-.01em}
+.section-title .acc,.sobre-text h2 .acc,.contacto-text h2 .acc,.cta-sec h2 .acc{color:var(--acc)}
+.section-subtitle{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:380px}
+
+/* PRODUCTOS */
+.productos{padding:120px 52px;background:var(--bg)}
+.prod-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.prod-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .35s,border-color .35s;display:flex;flex-direction:column}
+.prod-card:hover{transform:translateY(-6px);border-color:rgba(224,138,99,.55)}
+.prod-img{position:relative;aspect-ratio:3/2;overflow:hidden;background:#221d1a}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.prod-img::after{content:'';position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(0deg,rgba(24,21,19,.9),transparent)}
+.prod-num{position:absolute;right:16px;bottom:8px;z-index:1;font-family:'Anton',Impact,sans-serif;font-size:2.6rem;color:rgba(245,241,236,.16);line-height:1}
+.prod-body{padding:24px 26px 28px;display:flex;flex-direction:column;flex:1}
+.prod-uso{display:inline-block;align-self:flex-start;padding:3px 11px;border-radius:30px;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;background:rgba(245,241,236,.1);color:var(--white)}
+.prod-uso.star{background:var(--acc);color:var(--ink)}
+.prod-card h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:1.35rem;text-transform:uppercase;letter-spacing:.01em;margin-bottom:10px}
+.prod-card p{font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:18px;flex:1}
+.prod-link{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.prod-more{max-width:1200px;margin:26px auto 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.prod-more span{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.chip{padding:8px 14px;border-radius:40px;border:1px solid var(--border);font-size:.8rem;color:var(--acc2)}
+
+/* REPARTO */
+.reparto{padding:120px 52px;background:var(--bg2)}
+.rep-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}
+.rep-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:34px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.rep-card.featured{border-color:rgba(224,138,99,.6);background:linear-gradient(150deg,rgba(224,138,99,.12),rgba(224,138,99,.02) 60%),var(--card)}
+.rep-badge{display:inline-block;align-self:flex-start;padding:4px 12px;background:var(--acc);color:var(--ink);border-radius:20px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.rep-card h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:1.5rem;text-transform:uppercase;margin-bottom:6px}
+.rep-plazo{font-family:'Anton',Impact,sans-serif;font-size:2.6rem;color:var(--acc);line-height:1;margin:14px 0 4px}
+.rep-card:not(.featured) .rep-plazo{color:var(--acc2)}
+.rep-sub{font-size:.76rem;color:var(--muted);margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em}
+.rep-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.rep-list li{font-size:.86rem;color:rgba(245,241,236,.82);line-height:1.55;padding-left:18px;position:relative}
+.rep-list li::before{content:'';position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.rep-note{max-width:1200px;margin:26px auto 0;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.6}
+
+/* SOBRE */
+.sobre{padding:120px 52px;background:var(--bg)}
+.sobre-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.sobre-text h2{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(2rem,4vw,4rem);text-transform:uppercase;line-height:.92;margin-bottom:22px}
+.sobre-text p{color:var(--muted);line-height:1.75;margin-bottom:14px;font-size:.93rem}
+.sobre-text strong{color:var(--white);font-weight:600}
+.sobre-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+.stat-num{font-family:'Anton',Impact,sans-serif;font-size:2rem;color:var(--acc);line-height:1}
+.stat-box.alt .stat-num{color:var(--acc2)}
+.stat-lbl{font-size:.72rem;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+.sobre-media{position:relative}
+.sobre-photo{border-radius:20px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;background:#221d1a}
+.sobre-photo img{width:100%;height:100%;object-fit:cover}
+.confian{position:relative;margin:-60px 24px 0;background:rgba(24,21,19,.96);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:22px 24px}
+.confian .lbl{font-size:.64rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.16em;margin-bottom:10px}
+.confian ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+.confian li{font-size:.8rem;color:rgba(245,241,236,.82)}
+.confian li::before{content:'· ';color:var(--acc)}
+.confian .fuente{font-size:.68rem;color:var(--muted);margin-top:10px}
+
+/* SERVICIOS (fotos) */
+.servicios{padding:0 52px 120px;background:var(--bg)}
+.serv-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.serv-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;transition:transform .35s,border-color .35s}
+.serv-card:hover{transform:translateY(-6px);border-color:rgba(224,138,99,.5)}
+.serv-ico{width:44px;height:44px;border-radius:12px;background:var(--glow);color:var(--acc);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.serv-ico svg{width:22px;height:22px}
+.serv-card h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:1.25rem;text-transform:uppercase;margin-bottom:10px}
+.serv-card p{font-size:.85rem;color:var(--muted);line-height:1.7}
+
+/* PROCESO */
+.proceso{padding:120px 52px;background:var(--bg2)}
+.proc-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.proc-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;transition:border-color .35s,transform .35s}
+.proc-card:hover{border-color:rgba(224,138,99,.5);transform:translateY(-6px)}
+.proc-num{font-family:'Anton',Impact,sans-serif;font-size:2.6rem;color:var(--acc);line-height:1;margin-bottom:14px}
+.proc-card h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:1.15rem;text-transform:uppercase;margin-bottom:10px}
+.proc-card p{font-size:.84rem;color:var(--muted);line-height:1.65}
+
+/* CONTACTO */
+.contacto{padding:120px 52px;background:var(--bg)}
+.contacto-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:start}
+.contacto-text h2{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(2rem,4vw,4rem);text-transform:uppercase;line-height:.92;margin-bottom:20px}
+.contacto-text > p{color:var(--muted);line-height:1.75;margin-bottom:26px;font-size:.93rem}
+.contact-items{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.c-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.c-item .lbl{font-size:.64rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.16em;margin-bottom:8px}
+.c-item p,.c-item a{font-size:.88rem;color:rgba(245,241,236,.85);line-height:1.6;display:block}
+.c-item a:hover{color:var(--acc)}
+.contacto-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;position:sticky;top:120px}
+.contacto-box h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:1.6rem;text-transform:uppercase;margin-bottom:8px;color:var(--acc)}
+.contacto-box p{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:26px}
+.contacto-box .btn-primary,.contacto-box .btn-outline{width:100%;margin-bottom:12px}
+.contacto-box small{display:block;font-size:.74rem;color:var(--muted);line-height:1.6;margin-top:6px}
+
+/* FAQ */
+.faq{padding:120px 52px;background:var(--bg2)}
+.faq-in{max-width:820px;margin:0 auto}
+.faq-list{margin-top:56px}
+.faq-item{border-top:1px solid var(--border2)}
+.faq-item:last-child{border-bottom:1px solid var(--border2)}
+.faq-q{width:100%;background:none;border:none;padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;text-align:left;font-family:inherit}
+.faq-q-text{font-size:.96rem;font-weight:600;color:var(--white);line-height:1.45}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--acc);font-size:1.1rem;transition:transform .3s,background .3s,color .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--acc);color:var(--ink);border-color:var(--acc)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:420px}
+.faq-a p{font-size:.88rem;color:var(--muted);line-height:1.75;padding:0 0 22px}
+
+/* CTA */
+.cta-sec{padding:120px 52px;background:var(--bg);text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'LEÑA';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Anton',Impact,sans-serif;font-size:clamp(5rem,22vw,20rem);color:var(--acc);opacity:.05;white-space:nowrap;pointer-events:none}
+.cta-sec .wrap{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.cta-sec h2{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:clamp(2.2rem,5.5vw,5rem);text-transform:uppercase;line-height:.92;margin-bottom:16px;text-wrap:balance}
+.cta-sec p{color:var(--muted);margin-bottom:34px;font-size:1rem;line-height:1.7}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:#070605;border-top:1px solid var(--border);padding:60px 52px 36px}
+.footer-in{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand img{width:180px;height:auto;margin-bottom:16px}
+.footer-brand p{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--white);margin-bottom:16px}
+.footer-col a,.footer-col p{font-size:.82rem;color:var(--muted);display:block;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--acc)}
+.footer-bottom{border-top:1px solid var(--border2);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:.74rem;color:rgba(245,241,236,.42)}
+.footer-copy a{color:var(--acc)}
+.footer-badge{font-family:'Anton',Impact,sans-serif;font-size:.72rem;letter-spacing:.12em;color:rgba(245,241,236,.3);text-transform:uppercase}
+
+/* BADGE FIJO */
+.fire-badge{position:fixed;bottom:28px;left:28px;z-index:400;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .35s,transform .35s;background:rgba(24,21,19,.95);backdrop-filter:blur(10px);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 24px rgba(0,0,0,.5);border:1px solid var(--border);max-width:270px}
+.fire-badge.show{opacity:1;transform:none}
+.fire-badge .seal{width:44px;height:44px;border-radius:50%;background:var(--acc);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Anton',Impact,sans-serif;font-size:.95rem;color:var(--ink)}
+.fire-badge .lbl{font-size:.6rem;color:var(--acc);text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.fire-badge .txt{font-size:.78rem;color:var(--white);line-height:1.35;margin-top:2px}
+
+/* ===== CHATBOT ===== */
+.cb-fab{position:fixed;bottom:28px;right:28px;z-index:500;width:60px;height:60px;background:var(--acc);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(224,138,99,.35);transition:all .25s}
+.cb-fab:hover{transform:scale(1.08);background:var(--acc-hover)}
+.cb-fab .notif{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:#f5f1ec;border-radius:50%;border:2px solid var(--bg);animation:ember 2s infinite}
+.widget{position:fixed;bottom:100px;right:28px;z-index:499;width:376px;max-width:calc(100vw - 32px);background:#161311;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:scale(.85) translateY(20px);opacity:0;pointer-events:none;transition:all .3s;display:flex;flex-direction:column;max-height:min(640px,calc(100svh - 130px))}
+.widget.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chat-head{background:linear-gradient(135deg,#221c18,#12100e);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.chat-avatar{width:38px;height:38px;border-radius:50%;background:var(--acc);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ink)}
+.chat-avatar svg{width:20px;height:20px}
+.chat-head-info{flex:1;min-width:0}
+.chat-ia{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--acc2);border-radius:20px;padding:2px 8px;margin-bottom:3px}
+.chat-head-name{font-family:'Anton',Impact,sans-serif;font-size:1rem;letter-spacing:.02em;color:var(--white)}
+.chat-head-sub{font-size:.7rem;color:var(--muted);margin-top:1px;display:flex;align-items:center;gap:6px}
+.chat-head-sub::before{content:'';width:7px;height:7px;border-radius:50%;background:#6fcf7f}
+.chat-close{background:none;border:none;cursor:pointer;color:var(--muted);line-height:1;transition:color .2s;padding:6px}
+.chat-close:hover{color:var(--white)}
+.cb-tabs{display:flex;border-bottom:1px solid var(--border2);background:#12100e}
+.cb-tab{flex:1;padding:11px 6px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:all .2s;border-bottom:2px solid transparent}
+.cb-tab.active{color:var(--acc);border-bottom-color:var(--acc)}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px 14px 10px;display:flex;flex-direction:column;gap:10px;min-height:150px;max-height:290px}
+.msg{max-width:86%;padding:10px 14px;border-radius:14px;font-size:.83rem;line-height:1.55;white-space:pre-line;word-wrap:break-word}
+.msg.bot{background:#231e1a;color:var(--white);border-radius:14px 14px 14px 4px;align-self:flex-start}
+.msg.user{background:var(--acc);color:var(--ink);border-radius:14px 14px 4px 14px;align-self:flex-end;font-weight:500}
+.msg-typing{background:#231e1a;border-radius:14px;padding:12px 16px;align-self:flex-start;display:flex;gap:4px}
+.msg-typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:typing 1.2s infinite}
+.msg-typing span:nth-child(2){animation-delay:.2s}
+.msg-typing span:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.quick-btns{display:flex;flex-direction:column;gap:7px;margin-top:2px}
+.quick-btn{background:#1f1a17;border:1px solid var(--border);border-radius:12px;padding:10px 14px;cursor:pointer;font-family:inherit;font-size:.82rem;color:var(--white);text-align:left;transition:all .2s}
+.quick-btn:hover{border-color:var(--acc);background:#29221d}
+.cb-panel{display:none;padding:12px 14px;gap:8px;flex-direction:column;overflow-y:auto;max-height:250px;border-top:1px solid var(--border2)}
+.cb-panel.show{display:flex}
+.cita-btn{background:#1f1a17;border:1px solid var(--border);border-radius:12px;padding:10px 14px;cursor:pointer;font-family:inherit;font-size:.82rem;color:var(--white);text-align:left;display:flex;align-items:center;gap:11px;transition:all .2s}
+.cita-btn:hover{border-color:var(--acc);background:#29221d}
+.cb-icon{flex-shrink:0;color:var(--acc);display:flex}
+.cb-label{font-weight:600;display:block;font-size:.82rem;margin-bottom:2px}
+.cb-sub{font-size:.72rem;color:var(--muted)}
+.chat-input{display:flex;gap:8px;align-items:center;padding:12px 14px;border-top:1px solid var(--border2);background:#12100e}
+.chat-input input{flex:1;min-width:0;background:#1f1a17;border:1px solid var(--border);border-radius:12px;padding:11px 14px;font-family:inherit;font-size:16px;color:var(--white);outline:none;transition:border-color .2s}
+.chat-input input:focus{border-color:var(--acc)}
+.chat-input input::placeholder{color:var(--muted)}
+.send-btn{width:40px;height:40px;border-radius:50%;background:var(--acc);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.send-btn:hover{background:var(--acc-hover)}
+.send-btn svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cb-foot2{background:#0e0c0a;border-top:1px solid var(--border2);text-align:center;padding:8px;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,241,236,.3)}
+.info-block{background:rgba(224,138,99,.08);border:1px solid rgba(224,138,99,.3);border-radius:12px;padding:12px 14px;font-size:.8rem;line-height:1.55;color:var(--white)}
+.resumen{background:#1f1a17;border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+.resumen .t{font-family:'Anton',Impact,sans-serif;font-size:.9rem;text-transform:uppercase;letter-spacing:.04em;color:var(--acc);margin-bottom:8px}
+.resumen .r{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-top:1px solid var(--border2);font-size:.79rem}
+.resumen .r:first-of-type{border-top:none}
+.resumen .k{color:var(--muted)}
+.resumen .v{color:var(--white);font-weight:600;text-align:right}
+.chat-actions{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.chat-actions a{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:12px;font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.chat-actions .wa{background:var(--acc);color:var(--ink)}
+.chat-actions .tel{border:1px solid var(--border);color:var(--white)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav{padding:14px 24px}
+  .nav-links{display:none}
+  .nav-logo img{width:130px}
+  .hero{padding:120px 24px 52px}
+  .productos,.reparto,.sobre,.proceso,.contacto,.faq,.cta-sec{padding:80px 24px}
+  .servicios{padding:0 24px 80px}
+  .prod-grid,.rep-grid,.serv-grid{grid-template-columns:1fr 1fr}
+  .rep-card.featured{grid-column:1/-1}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .sobre-in{grid-template-columns:1fr;gap:40px}
+  .contacto-in{grid-template-columns:1fr;gap:40px}
+  .contacto-box{position:static}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .widget{right:12px;left:12px;width:auto;max-width:none}
+  .cb-fab{bottom:20px;right:20px}
+  .fire-badge{display:none}
+  .marquee-wrap2{display:none}
+}
+@media(max-width:600px){
+  .nav-cta{padding:9px 14px;font-size:.72rem}
+  .demo-strip{font-size:.64rem;letter-spacing:.08em}
+  .ds-long{display:none}
+  .hero-tag{letter-spacing:.1em;font-size:.64rem}
+  .hero-stats{gap:22px 28px}
+  .hero-cta-row .btn-primary,.hero-cta-row .btn-outline{flex:1 1 100%}
+  .prod-grid,.rep-grid,.serv-grid,.proc-grid,.contact-items{grid-template-columns:1fr}
+  .confian{margin:-40px 12px 0}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .cta-btns{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-strip">
+  DEMO<span class="ds-long"> · Carbones Saiz</span> · WhiteMoon Agencia IA · <a href="https://whitemoon.es">whitemoon.es</a>
+</div>
+
+<div class="preloader" id="pre" aria-hidden="true">
+  <div class="pre-logo"><img src="img/logo-carbones-saiz.webp" alt="" width="228" height="67"></div>
+</div>
+
+<nav class="nav" id="nav" aria-label="Principal">
+  <a href="#top" class="nav-logo"><img src="img/logo-carbones-saiz.webp" alt="Carbones Saiz · Para su chimenea y BBQ" width="228" height="67"></a>
+  <div class="nav-links">
+    <a href="#productos">Productos</a>
+    <a href="#reparto">Reparto</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#pedido">Cómo pedir</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="tel:+34660152585" class="nav-cta">660 15 25 85</a>
+</nav>
+
+<main>
+<section class="hero" id="top">
+  <img class="hero-img" src="img/flota.webp" alt="" width="1104" height="736" fetchpriority="high" decoding="async">
+  <div class="hero-in">
+    <div class="hero-tag"><span class="dot"></span>Más de 40 años en la Sierra de Guadarrama</div>
+    <h1>Leña y carbón<br>de la Sierra<br>a tu <span class="acc">fuego</span></h1>
+    <p class="hero-sub">Leña de encina, carbón vegetal, briquetas y pellets desde Collado Villalba. Reparto propio en Madrid y la Sierra, y envíos paletizados a toda la Península.</p>
+    <div class="hero-cta-row">
+      <a href="https://wa.me/34660152585?text=Hola%2C+me+gustar%C3%ADa+pedir+presupuesto+de+le%C3%B1a+o+carb%C3%B3n" target="_blank" rel="noopener" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2"/></svg>
+        Pedir presupuesto
+      </a>
+      <a href="tel:+34918512397" class="btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+        918 51 23 97
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><strong>+40 años</strong><span>empresa familiar</span></div>
+      <div class="h-stat"><strong>24–72 h</strong><span>reparto Madrid y Sierra</span></div>
+      <div class="h-stat"><strong>Península</strong><span>envío paletizado</span></div>
+      <div class="h-stat"><strong>Todo el año</strong><span>stock en almacén propio</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Leña de encina <span class="sep">·</span></span>
+    <span class="marquee-item">Carbón vegetal <span class="sep">·</span></span>
+    <span class="marquee-item">Briquetas <span class="sep">·</span></span>
+    <span class="marquee-item">Pellets <span class="sep">·</span></span>
+    <span class="marquee-item">Carbón para hostelería <span class="sep">·</span></span>
+    <span class="marquee-item">Encendido <span class="sep">·</span></span>
+    <span class="marquee-item">Deshollinado <span class="sep">·</span></span>
+    <span class="marquee-item">Barbacoas y chimeneas <span class="sep">·</span></span>
+    <span class="marquee-item">Leña de encina <span class="sep">·</span></span>
+    <span class="marquee-item">Carbón vegetal <span class="sep">·</span></span>
+    <span class="marquee-item">Briquetas <span class="sep">·</span></span>
+    <span class="marquee-item">Pellets <span class="sep">·</span></span>
+    <span class="marquee-item">Carbón para hostelería <span class="sep">·</span></span>
+    <span class="marquee-item">Encendido <span class="sep">·</span></span>
+    <span class="marquee-item">Deshollinado <span class="sep">·</span></span>
+    <span class="marquee-item">Barbacoas y chimeneas <span class="sep">·</span></span>
+  </div>
+</div>
+
+<section class="productos" id="productos">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">01 — Combustibles</div>
+      <h2 class="section-title">Lo que<br><span class="acc">vendemos</span></h2>
+    </div>
+    <p class="section-subtitle">Maderas nobles, principalmente encina, seleccionadas por su densidad y bajo grado de humedad. Para chimenea, estufa, barbacoa, horno de leña y hostelería.</p>
+  </div>
+  <div class="prod-grid">
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/lena-encina.webp" alt="Leña de encina apilada" width="640" height="427" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">01</span></div>
+      <div class="prod-body">
+        <span class="prod-uso star">Producto estrella</span>
+        <h3>Leña de encina</h3>
+        <p>Alto poder calorífico y combustión lenta y regular: mantiene el fuego durante horas. Seca y lista para chimenea y estufa.</p>
+        <span class="prod-link">Chimenea · Estufa</span>
+      </div>
+    </article>
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/carbon-encina.webp" alt="Brasas de carbón de leña de encina" width="640" height="427" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">02</span></div>
+      <div class="prod-body">
+        <span class="prod-uso">Brasa</span>
+        <h3>Carbón de leña de encina</h3>
+        <p>Carbón vegetal elegido por su durabilidad y su aroma. Brasas de larga duración para barbacoa, parrilla y asador.</p>
+        <span class="prod-link">Barbacoa · Parrilla</span>
+      </div>
+    </article>
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/carbon-hosteleria.webp" alt="Carbón premium para hostelería" width="640" height="427" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">03</span></div>
+      <div class="prod-body">
+        <span class="prod-uso">Profesional</span>
+        <h3>Carbón para hostelería</h3>
+        <p>Carbón premium para restaurantes, asadores y gran consumidor, con suministro todo el año desde almacén propio.</p>
+        <span class="prod-link">Restaurantes · Asadores</span>
+      </div>
+    </article>
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/carbon-bolsa.webp" alt="Sacos de carbón premium" width="610" height="407" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">04</span></div>
+      <div class="prod-body">
+        <span class="prod-uso">Hogar</span>
+        <h3>Carbón premium en bolsa</h3>
+        <p>El formato cómodo para la barbacoa de casa: carbón vegetal de calidad superior, listo para llevar.</p>
+        <span class="prod-link">Barbacoa en casa</span>
+      </div>
+    </article>
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/briquetas.webp" alt="Briquetas ardiendo" width="640" height="461" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">05</span></div>
+      <div class="prod-body">
+        <span class="prod-uso">Estufa</span>
+        <h3>Briquetas</h3>
+        <p>Combustible compacto y constante para estufa y chimenea. Te asesoramos sobre si te conviene frente a la leña.</p>
+        <span class="prod-link">Estufa · Chimenea</span>
+      </div>
+    </article>
+    <article class="prod-card">
+      <div class="prod-img"><img src="img/pellets.webp" alt="Pellets de madera" width="460" height="309" loading="lazy" decoding="async"><span class="prod-num" aria-hidden="true">06</span></div>
+      <div class="prod-body">
+        <span class="prod-uso">Biomasa</span>
+        <h3>Pellets</h3>
+        <p>Pellets certificados para estufas y calderas de biomasa. Con stock en temporada de invierno y en verano.</p>
+        <span class="prod-link">Estufa · Caldera</span>
+      </div>
+    </article>
+  </div>
+  <div class="prod-more">
+    <span>Y además</span>
+    <span class="chip">Encendido</span>
+    <span class="chip">Limpieza y deshollinado</span>
+    <span class="chip">Barbacoas y chimeneas</span>
+    <span class="chip">Accesorios y herramientas</span>
+    <span class="chip">Protección</span>
+  </div>
+</section>
+
+<section class="reparto" id="reparto">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">02 — Reparto</div>
+      <h2 class="section-title">Te lo<br>llevamos <span class="acc">donde estés</span></h2>
+    </div>
+    <p class="section-subtitle">Un sistema doble: flota propia para Madrid y la Sierra, y agencias de carga pesada para el resto de la Península.</p>
+  </div>
+  <div class="rep-grid">
+    <div class="rep-card featured">
+      <span class="rep-badge">Flota propia</span>
+      <h3>Madrid y Sierra</h3>
+      <div class="rep-plazo">24–72 h</div>
+      <div class="rep-sub">en temporada, según ruta y volumen</div>
+      <ul class="rep-list">
+        <li>Collado Villalba, Alpedrete, Moralzarzal, Galapagar, Torrelodones, Las Rozas y alrededores</li>
+        <li>Camiones de varios tamaños para accesos difíciles</li>
+        <li>Colocación y apilado de la leña bajo presupuesto</li>
+        <li>Te confirmamos el hueco antes de salir hacia tu casa</li>
+      </ul>
+    </div>
+    <div class="rep-card">
+      <h3>Resto de la Península</h3>
+      <div class="rep-plazo">3–5 días</div>
+      <div class="rep-sub">laborables tras confirmar presupuesto</div>
+      <ul class="rep-list">
+        <li>Envío paletizado con agencias especializadas</li>
+        <li>Presupuesto según volumen y código postal</li>
+        <li>Entrega a pie de calle</li>
+      </ul>
+    </div>
+    <div class="rep-card">
+      <h3>Recogida en almacén</h3>
+      <div class="rep-plazo">P-29</div>
+      <div class="rep-sub">Collado Villalba</div>
+      <ul class="rep-list">
+        <li>C/ Husillo, 1 · Polígono P-29</li>
+        <li>L-V 9:00–14:00 y 16:00–19:00</li>
+        <li>Sábados 9:00–14:00</li>
+      </ul>
+    </div>
+  </div>
+  <p class="rep-note">El precio depende del producto, la cantidad y el código postal: te lo confirmamos al hacer el pedido, junto con la fecha de entrega.</p>
+</section>
+
+<section class="sobre" id="nosotros">
+  <div class="sobre-in">
+    <div class="sobre-text">
+      <div class="section-tag">03 — Quiénes somos</div>
+      <h2>Cuatro décadas<br>de <span class="acc">calor</span></h2>
+      <p>Lo que empezó hace <strong>más de 40 años</strong> como un pequeño proyecto familiar en Collado Villalba es hoy la leñera de referencia en la Sierra de Guadarrama. Dos generaciones dedicadas a entender el fuego: qué madera necesita cada chimenea y qué carbón exige cada parrilla.</p>
+      <p>Desde nuestro almacén en el <strong>Polígono P-29</strong> controlamos el secado, el envasado y la logística. No somos intermediarios: somos especialistas.</p>
+      <div class="sobre-stats">
+        <div class="stat-box"><div class="stat-num">+40</div><div class="stat-lbl">años de experiencia</div></div>
+        <div class="stat-box alt"><div class="stat-num">2</div><div class="stat-lbl">generaciones</div></div>
+        <div class="stat-box alt"><div class="stat-num">P-29</div><div class="stat-lbl">almacén propio</div></div>
+        <div class="stat-box"><div class="stat-num">365</div><div class="stat-lbl">días con stock</div></div>
+      </div>
+    </div>
+    <div class="sobre-media">
+      <div class="sobre-photo"><img src="img/instalaciones.webp" alt="Instalaciones de Carbones Saiz en Collado Villalba" width="526" height="395" loading="lazy" decoding="async"></div>
+      <div class="confian">
+        <div class="lbl">Confían en nosotros</div>
+        <ul>
+          <li>Ayto. de Collado Villalba</li>
+          <li>Ayto. de Majadahonda</li>
+          <li>Ayto. de Torrelodones</li>
+          <li>Ayto. de Galapagar</li>
+          <li>Ayto. de Alpedrete</li>
+          <li>Ayto. de Moralzarzal</li>
+          <li>Ayto. de Hoyo de Manzanares</li>
+          <li>Patrimonio Nacional</li>
+          <li>Restaurantes y asadores de la Sierra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servicios" aria-label="Servicios">
+  <div class="serv-grid">
+    <div class="serv-card">
+      <div class="serv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <h3>Entrega a domicilio</h3>
+      <p>Reparto rápido en Madrid noroeste con camiones propios y envío al resto de la Península.</p>
+    </div>
+    <div class="serv-card">
+      <div class="serv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg></div>
+      <h3>Colocación de leña</h3>
+      <p>Descargamos, llevamos y apilamos la leña ordenada y nivelada, cuidando accesos y paredes. Suele llevar de 30 a 90 minutos.</p>
+    </div>
+    <div class="serv-card">
+      <div class="serv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h3>Asesoramiento experto</h3>
+      <p>Qué comprar y cuánto, sin dudas: te ayudamos a elegir combustible y cantidad por teléfono o WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap2" aria-hidden="true">
+  <div class="marquee-track2">
+    <span class="marquee-item2">Reparto propio <span class="sep">·</span></span>
+    <span class="marquee-item2">Colocación de leña <span class="sep">·</span></span>
+    <span class="marquee-item2">Envío paletizado <span class="sep">·</span></span>
+    <span class="marquee-item2">Asesoramiento experto <span class="sep">·</span></span>
+    <span class="marquee-item2">Stock todo el año <span class="sep">·</span></span>
+    <span class="marquee-item2">Empresa familiar <span class="sep">·</span></span>
+    <span class="marquee-item2">Reparto propio <span class="sep">·</span></span>
+    <span class="marquee-item2">Colocación de leña <span class="sep">·</span></span>
+    <span class="marquee-item2">Envío paletizado <span class="sep">·</span></span>
+    <span class="marquee-item2">Asesoramiento experto <span class="sep">·</span></span>
+    <span class="marquee-item2">Stock todo el año <span class="sep">·</span></span>
+    <span class="marquee-item2">Empresa familiar <span class="sep">·</span></span>
+  </div>
+</div>
+
+<section class="proceso" id="pedido">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">04 — Cómo pedir</div>
+      <h2 class="section-title">Tu pedido<br>en <span class="acc">4 pasos</span></h2>
+    </div>
+    <p class="section-subtitle">Sin formularios largos: nos dices qué necesitas y nosotros nos encargamos del resto.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-card">
+      <div class="proc-num">01</div>
+      <h3>Cuéntanos qué necesitas</h3>
+      <p>Producto, cantidad aproximada y tu código postal. Por teléfono, WhatsApp o el asistente de esta web.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">02</div>
+      <h3>Precio y fecha</h3>
+      <p>Te confirmamos el precio y el primer hueco disponible de entrega en tu zona.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">03</div>
+      <h3>Entrega</h3>
+      <p>Con nuestra flota en Madrid y la Sierra, o paletizado por agencia en el resto de la Península.</p>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">04</div>
+      <h3>Pago y colocación</h3>
+      <p>Efectivo o tarjeta en la entrega; transferencia previa bajo solicitud. Si lo pides, apilamos la leña.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="contacto-in">
+    <div class="contacto-text">
+      <div class="section-tag">05 — Contacto</div>
+      <h2>Hablemos de<br>tu <span class="acc">pedido</span></h2>
+      <p>Tanto si necesitas un pedido rápido en la Sierra como un presupuesto para cualquier punto de la Península, te atendemos en el mismo día dentro del horario.</p>
+      <div class="contact-items">
+        <div class="c-item"><div class="lbl">Teléfonos</div><a href="tel:+34918512397">918 51 23 97</a><a href="tel:+34660152585">660 15 25 85 · también WhatsApp</a></div>
+        <div class="c-item"><div class="lbl">Email</div><a href="mailto:carbonessaiz@gmail.com">carbonessaiz@gmail.com</a></div>
+        <div class="c-item"><div class="lbl">Dirección</div><p>C/ Husillo, 1 · Polígono P-29<br>28400 Collado Villalba (Madrid)</p></div>
+        <div class="c-item"><div class="lbl">Horario</div><p>L-V 9:00–14:00 y 16:00–19:00<br>Sábados 9:00–14:00 · Domingos cerrado</p></div>
+      </div>
+    </div>
+    <div class="contacto-box">
+      <h3>Pide presupuesto</h3>
+      <p>Dinos producto, cantidad aproximada y código postal, y te confirmamos precio y fecha de entrega.</p>
+      <a href="https://wa.me/34660152585?text=Hola%2C+me+gustar%C3%ADa+solicitar+un+presupuesto+o+consultar+disponibilidad+en+mi+zona" target="_blank" rel="noopener" class="btn-primary">WhatsApp 660 15 25 85</a>
+      <a href="tel:+34918512397" class="btn-outline">Llamar al 918 51 23 97</a>
+      <small>Si no respondemos al momento, te llamamos en cuanto terminemos las entregas.</small>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="faq-in">
+    <div class="section-tag" style="text-align:center">06 — Preguntas frecuentes</div>
+    <h2 class="section-title" style="text-align:center;margin-top:10px">Tus <span class="acc">dudas</span> resueltas</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿En cuánto tiempo entregáis mi pedido?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>En Madrid y la Sierra, normalmente entre 24 y 72 horas según volumen y ruta. En picos de temporada puede alargarse; te lo confirmamos al cerrar el pedido. En el resto de la Península, entre 3 y 5 días laborables tras confirmar presupuesto y stock.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿Qué formas de pago aceptáis?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Efectivo y tarjeta en la entrega; transferencia previa bajo solicitud. Consúltanos para otras opciones.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿Hay pedido mínimo?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>En Collado Villalba no suele aplicarse. En localidades más alejadas puede haber un mínimo o recargo de transporte. Para envíos nacionales depende del combustible y la cantidad: consúltanos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿Me colocáis la leña?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Sí, en Madrid y la Sierra, bajo presupuesto. Descargamos, llevamos la leña hasta tu leñero y la dejamos apilada y nivelada. En envíos nacionales la entrega es a pie de calle y no incluye apilado.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿Qué es mejor, leña de encina o de roble?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>La encina tiene un poder calorífico muy alto y una combustión lenta y regular. El roble es muy duradero y suele hacer menos humo, aunque cuesta algo más de encender. Si buscas el máximo calor durante horas, la encina es nuestra recomendación.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">¿Qué pasa si llueve el día de la entrega?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Reprogramamos sin coste y protegemos la mercancía. Si necesitas urgencia, buscamos la mejor alternativa disponible.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="section-tag" style="margin-bottom:14px">Tu leña, a tiempo</div>
+    <h2>Que el frío te pille con el <span class="acc">leñero lleno</span></h2>
+    <p>Dinos qué necesitas y te confirmamos precio y fecha. Madrid, la Sierra y toda la Península.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/34660152585?text=Hola%2C+me+gustar%C3%ADa+pedir+presupuesto+de+le%C3%B1a+o+carb%C3%B3n" target="_blank" rel="noopener" class="btn-primary">Pedir por WhatsApp</a>
+      <a href="tel:+34918512397" class="btn-outline">918 51 23 97</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="img/logo-carbones-saiz.webp" alt="Carbones Saiz" width="228" height="67" loading="lazy">
+        <p>Leña y combustibles desde Collado Villalba. Más de 40 años en la Sierra de Guadarrama, con reparto propio en Madrid y envíos a toda la Península.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <a href="#productos">Leña de encina</a>
+        <a href="#productos">Carbón vegetal</a>
+        <a href="#productos">Briquetas y pellets</a>
+        <a href="#productos">Hostelería</a>
+      </div>
+      <div class="footer-col">
+        <h4>Reparto</h4>
+        <p>Madrid y Sierra · 24–72 h</p>
+        <p>Península · 3–5 días</p>
+        <p>Colocación de leña</p>
+        <p>Recogida en almacén</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="tel:+34918512397">918 51 23 97</a>
+        <a href="tel:+34660152585">660 15 25 85</a>
+        <a href="mailto:carbonessaiz@gmail.com">carbonessaiz@gmail.com</a>
+        <p>C/ Husillo, 1 · P-29 · Collado Villalba</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Carbones Saiz · Collado Villalba (Madrid) · Demo de <a href="https://whitemoon.es">WhiteMoon Agencia IA</a></p>
+      <div class="footer-badge">DEMO · WHITEMOON · whitemoon.es</div>
+    </div>
+  </div>
+</footer>
+
+<div class="fire-badge" aria-hidden="true">
+  <div class="seal">+40</div>
+  <div><div class="lbl">Reparto propio</div><div class="txt">Madrid y Sierra en 24–72 h</div></div>
+</div>
+
+<!-- CHATBOT -->
+<button class="cb-fab" id="fab" type="button" aria-label="Abrir el asistente de pedidos">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1b0f09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="notif"></span>
+</button>
+
+<div class="widget" id="widget" role="dialog" aria-label="Asistente de pedidos de Carbones Saiz">
+  <div class="chat-head">
+    <div class="chat-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+    <div class="chat-head-info">
+      <span class="chat-ia">Asistente IA</span>
+      <div class="chat-head-name">Pedidos · Carbones Saiz</div>
+      <div class="chat-head-sub">En línea · respuesta inmediata</div>
+    </div>
+    <button class="chat-close" id="chatClose" type="button" aria-label="Cerrar">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+    </button>
+  </div>
+
+  <div class="cb-tabs" role="tablist">
+    <button class="cb-tab active" id="tab-pedido" type="button" data-tab="pedido">Pedido</button>
+    <button class="cb-tab" id="tab-info" type="button" data-tab="info">Info</button>
+    <button class="cb-tab" id="tab-texto" type="button" data-tab="texto">Preguntas</button>
+  </div>
+
+  <div class="chat-msgs" id="msgs" aria-live="polite"></div>
+
+  <div class="cb-panel show" id="panel-pedido">
+    <button class="cita-btn" type="button" data-prod="Leña de encina"><span class="cb-icon">🪵</span><div><span class="cb-label">Leña de encina</span><span class="cb-sub">Chimenea y estufa</span></div></button>
+    <button class="cita-btn" type="button" data-prod="Carbón vegetal de encina"><span class="cb-icon">🔥</span><div><span class="cb-label">Carbón vegetal</span><span class="cb-sub">Barbacoa, parrilla, asador</span></div></button>
+    <button class="cita-btn" type="button" data-prod="Carbón para hostelería"><span class="cb-icon">🍖</span><div><span class="cb-label">Carbón para hostelería</span><span class="cb-sub">Restaurantes y gran consumo</span></div></button>
+    <button class="cita-btn" type="button" data-prod="Briquetas o pellets"><span class="cb-icon">🧱</span><div><span class="cb-label">Briquetas o pellets</span><span class="cb-sub">Estufas y calderas</span></div></button>
+    <button class="cita-btn" type="button" data-prod="Colocación de leña"><span class="cb-icon">📦</span><div><span class="cb-label">Colocación de leña</span><span class="cb-sub">Madrid y Sierra, bajo presupuesto</span></div></button>
+    <button class="cita-btn" type="button" data-prod="No lo tengo claro"><span class="cb-icon">💬</span><div><span class="cb-label">No lo tengo claro</span><span class="cb-sub">Te asesoramos</span></div></button>
+  </div>
+
+  <div class="cb-panel" id="panel-info">
+    <button class="cita-btn" type="button" data-info="reparto"><span class="cb-icon">🚚</span><div><span class="cb-label">Reparto y plazos</span><span class="cb-sub">Madrid, Sierra y Península</span></div></button>
+    <button class="cita-btn" type="button" data-info="pago"><span class="cb-icon">💳</span><div><span class="cb-label">Formas de pago</span><span class="cb-sub">Efectivo, tarjeta, transferencia</span></div></button>
+    <button class="cita-btn" type="button" data-info="encina"><span class="cb-icon">🌳</span><div><span class="cb-label">¿Encina o roble?</span><span class="cb-sub">Qué leña calienta más</span></div></button>
+    <button class="cita-btn" type="button" data-info="horario"><span class="cb-icon">🕘</span><div><span class="cb-label">Horario y dirección</span><span class="cb-sub">Polígono P-29, Collado Villalba</span></div></button>
+  </div>
+
+  <div class="cb-panel" id="panel-texto">
+    <div class="cb-sub" style="padding:0 2px 4px">Escríbeme tu pregunta. Para pedir, usa la pestaña Pedido.</div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Escribe aquí..." autocomplete="off" aria-label="Escribe tu mensaje">
+    <button class="send-btn" id="sendBtn" type="button" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+  <div class="cb-foot2">Carbones Saiz · Demo WhiteMoon IA</div>
+</div>
+
+<script>
+'use strict';
+(function(){
+  /* ===== PRELOADER + NAV ===== */
+  var pre=document.getElementById('pre');
+  function hidePre(){ if(pre) pre.classList.add('hide'); }
+  window.addEventListener('load',function(){ setTimeout(hidePre,600); });
+  setTimeout(hidePre,2500);
+  var nav=document.getElementById('nav');
+  var badge=document.querySelector('.fire-badge');
+  function onScroll(){ nav.classList.toggle('scrolled',window.scrollY>60); if(badge) badge.classList.toggle('show',window.scrollY>window.innerHeight*.8); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* ===== FAQ ===== */
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.closest('.faq-item'), open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if(!open){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  /* ===== CHATBOT (guiado, sin backend: termina en WhatsApp) ===== */
+  var WA='34660152585', TEL='+34918512397';
+  var state, greeted=false;
+  function reset(){ state={step:0,producto:'',uso:'',zona:'',cantidad:'',cp:'',nombre:''}; }
+  reset();
+  var $=function(id){ return document.getElementById(id); };
+  var msgs=$('msgs'), widget=$('widget'), fab=$('fab'), input=$('chatInput');
+
+  function scroll(){ msgs.scrollTop=msgs.scrollHeight; }
+  function addMsg(text,type){ var d=document.createElement('div'); d.className='msg '+(type||'bot'); d.textContent=text; msgs.appendChild(d); scroll(); }
+  function addNode(node){ msgs.appendChild(node); scroll(); }
+  function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+  function typing(cb,ms){ var t=el('div','msg-typing','<span></span><span></span><span></span>'); t.id='typing'; addNode(t); setTimeout(function(){ t.remove(); cb(); },ms||650); }
+  function quick(options,onPick){
+    var box=el('div','quick-btns');
+    options.forEach(function(o){
+      var b=el('button','quick-btn'); b.type='button'; b.textContent=o;
+      b.addEventListener('click',function(){ box.remove(); addMsg(o,'user'); onPick(o); });
+      box.appendChild(b);
+    });
+    addNode(box);
+  }
+  function showTab(tab){
+    ['pedido','info','texto'].forEach(function(t){ $('panel-'+t).classList.toggle('show',t===tab); $('tab-'+t).classList.toggle('active',t===tab); });
+  }
+  function toggleChat(force){
+    var open=typeof force==='boolean'?force:!widget.classList.contains('open');
+    widget.classList.toggle('open',open);
+    fab.style.display=open?'none':'flex';
+    if(open && !greeted){
+      greeted=true;
+      typing(function(){ addMsg('Hola, soy el asistente de pedidos de Carbones Saiz (un asistente de IA).\n\nTe ayudo a preparar tu pedido de leña o carbón en un minuto y te lo dejo listo para enviarlo por WhatsApp. ¿Qué necesitas?'); },450);
+    }
+  }
+  fab.addEventListener('click',function(){ toggleChat(); });
+  $('chatClose').addEventListener('click',function(){ toggleChat(false); });
+  document.querySelectorAll('.cb-tab').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.dataset.tab); if(b.dataset.tab==='texto') input.focus(); }); });
+
+  /* Paso 1: producto */
+  document.querySelectorAll('#panel-pedido .cita-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      reset(); state.producto=b.dataset.prod;
+      addMsg(b.querySelector('.cb-label').textContent,'user');
+      showTab('texto');
+      if(state.producto==='No lo tengo claro'){
+        typing(function(){ addMsg('Sin problema, para eso estamos. ¿Para qué lo vas a usar?'); askUso(); });
+      } else if(state.producto==='Colocación de leña'){
+        state.uso='Colocación'; typing(function(){ addMsg('La colocación la hacemos en Madrid y la Sierra, bajo presupuesto: descargamos, llevamos la leña al leñero y la dejamos apilada.'); askZona(); });
+      } else {
+        typing(function(){ addMsg('Perfecto: '+state.producto.toLowerCase()+'. ¿Para qué lo vas a usar?'); askUso(); });
+      }
+    });
+  });
+  function askUso(){ quick(['Chimenea o estufa','Barbacoa o parrilla','Horno de leña','Restaurante u hostelería'],function(v){ state.uso=v; typing(askZona); }); }
+  function askZona(){
+    addMsg('¿Dónde te lo llevamos?');
+    quick(['Madrid y Sierra','Resto de la Península','Lo recojo en el almacén'],function(v){
+      state.zona=v;
+      typing(function(){
+        var info={'Madrid y Sierra':'Con nuestra flota propia: normalmente 24–72 h según ruta y volumen.','Resto de la Península':'Envío paletizado por agencia: 3–5 días laborables tras confirmar el presupuesto. Entrega a pie de calle.','Lo recojo en el almacén':'Te esperamos en C/ Husillo, 1 (Polígono P-29, Collado Villalba). L-V 9–14 h y 16–19 h, sábados 9–14 h.'}[v];
+        addNode(el('div','info-block',info));
+        setTimeout(function(){ addMsg('¿Qué cantidad aproximada necesitas? (por ejemplo: 1 palé, 500 kg, 10 sacos...)'); state.step=1; input.focus(); },350);
+      });
+    });
+  }
+
+  function validCP(v){ return /^\d{5}$/.test(v.replace(/\s/g,'')); }
+  function send(){
+    var m=input.value.trim(); if(!m) return; input.value=''; addMsg(m,'user');
+    if(state.step===1){ state.cantidad=m; state.step=2; typing(function(){ addMsg(state.zona==='Lo recojo en el almacén'?'¿Tu código postal? (nos ayuda a asesorarte; si prefieres, escribe "no")':'¿Cuál es tu código postal? Así calculamos el transporte.'); }); return; }
+    if(state.step===2){
+      if(!validCP(m) && !(state.zona==='Lo recojo en el almacén' && /^no$/i.test(m))){ typing(function(){ addMsg('Ese código postal no parece correcto. Son 5 cifras, por ejemplo 28400.'); },350); return; }
+      state.cp=m; state.step=3; typing(function(){ addMsg('Por último, ¿cómo te llamas?'); }); return;
+    }
+    if(state.step===3){ state.nombre=m; state.step=99; typing(resumen); return; }
+    if(state.step===99){ typing(function(){ addMsg('Tu pedido ya está preparado arriba: pulsa "Enviar por WhatsApp" y te confirmamos precio y fecha. Si quieres empezar otro, usa la pestaña Pedido.'); },350); return; }
+    libre(m);
+  }
+  $('sendBtn').addEventListener('click',send);
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter') send(); });
+
+  function resumen(){
+    addMsg('Gracias, '+state.nombre+'. Este es tu pedido:');
+    var rows=[['Producto',state.producto],['Uso',state.uso],['Entrega',state.zona],['Cantidad',state.cantidad],['Código postal',state.cp]];
+    var r=el('div','resumen','<div class="t">Resumen del pedido</div>');
+    rows.forEach(function(x){ var row=el('div','r'); var k=el('span','k'); k.textContent=x[0]; var v=el('span','v'); v.textContent=x[1]; row.appendChild(k); row.appendChild(v); r.appendChild(row); });
+    addNode(r);
+    var txt='Hola, soy '+state.nombre+'. Quiero pedir presupuesto:\n- Producto: '+state.producto+'\n- Uso: '+state.uso+'\n- Entrega: '+state.zona+'\n- Cantidad: '+state.cantidad+'\n- Código postal: '+state.cp;
+    var acts=el('div','chat-actions');
+    var wa=el('a','wa','Enviar por WhatsApp'); wa.href='https://wa.me/'+WA+'?text='+encodeURIComponent(txt); wa.target='_blank'; wa.rel='noopener';
+    var tel=el('a','tel','Prefiero llamar'); tel.href='tel:'+TEL;
+    acts.appendChild(wa); acts.appendChild(tel); addNode(acts);
+    setTimeout(function(){ addMsg('Te confirmamos precio y fecha de entrega. Si no respondemos al momento, te llamamos en cuanto terminemos las entregas.'); },400);
+  }
+
+  /* Info rápida */
+  var INFO={
+    reparto:'Reparto:\n\n- Madrid y Sierra: flota propia, normalmente 24–72 h según ruta y volumen.\n- Resto de la Península: envío paletizado por agencia, 3–5 días laborables, a pie de calle.\n- Recogida en almacén: Polígono P-29, Collado Villalba.',
+    pago:'Formas de pago: efectivo y tarjeta en la entrega. Transferencia previa bajo solicitud.',
+    encina:'La encina tiene un poder calorífico muy alto y una combustión lenta y regular: es la que más calor da durante horas. El roble dura mucho y suele hacer algo menos de humo, pero cuesta más de encender.',
+    horario:'C/ Husillo, 1 · Polígono P-29 · 28400 Collado Villalba.\n\nL-V 9:00–14:00 y 16:00–19:00\nSábados 9:00–14:00\nDomingos cerrado.\n\nTeléfonos: 918 51 23 97 y 660 15 25 85 (WhatsApp).'
+  };
+  document.querySelectorAll('#panel-info .cita-btn').forEach(function(b){
+    b.addEventListener('click',function(){ addMsg(b.querySelector('.cb-label').textContent,'user'); showTab('texto'); typing(function(){ addMsg(INFO[b.dataset.info]); }); });
+  });
+
+  /* Preguntas libres por palabras clave (demo) */
+  function libre(txt){
+    var t=txt.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    var r;
+    if(/precio|cuanto|cuesta|vale|coste|tarifa|presupuesto/.test(t)) r='El precio depende del producto, la cantidad y tu código postal. Usa la pestaña Pedido y te dejo la solicitud lista para WhatsApp: te confirmamos precio y fecha.';
+    else if(/entrega|plazo|tardais|cuando|reparto|envio|llega/.test(t)) r=INFO.reparto;
+    else if(/pago|tarjeta|efectivo|transferencia/.test(t)) r=INFO.pago;
+    else if(/encina|roble|calienta|humo/.test(t)) r=INFO.encina;
+    else if(/horario|abierto|direccion|donde|almacen|recoger|recojo/.test(t)) r=INFO.horario;
+    else if(/coloca|apila|leñero|lenero/.test(t)) r='Colocamos y apilamos la leña en Madrid y la Sierra, bajo presupuesto. Suele llevar de 30 a 90 minutos según volumen y accesos. En envíos nacionales la entrega es a pie de calle.';
+    else if(/minimo|pedido minimo/.test(t)) r='En Collado Villalba no suele haber pedido mínimo. En localidades más alejadas puede haber un mínimo o recargo de transporte; en envíos nacionales depende del producto y la cantidad.';
+    else if(/pellet|briqueta/.test(t)) r='Tenemos briquetas y pellets certificados para estufas y calderas, con stock todo el año. Dime cantidad y código postal en la pestaña Pedido.';
+    else if(/carbon|barbacoa|parrilla|brasa|asador|restaurante|hosteleria/.test(t)) r='Carbón vegetal de encina para barbacoa, parrilla y asador, carbón premium en bolsa y carbón para hostelería y gran consumidor. ¿Preparamos el pedido en la pestaña Pedido?';
+    else if(/lluvia|llueve/.test(t)) r='Si llueve el día de la entrega, reprogramamos sin coste y protegemos la mercancía.';
+    else if(/hola|buenas|buenos/.test(t)) r='¡Hola! ¿Qué necesitas: leña, carbón, briquetas o pellets? Puedes preparar el pedido en la pestaña Pedido.';
+    else r='Esa te la responde mejor el equipo: llama al 918 51 23 97 o escribe al 660 15 25 85 por WhatsApp. También puedes preparar el pedido en la pestaña Pedido.';
+    typing(function(){ addMsg(r); },400);
+  }
+})();
+</script>
+</body>
+</html>
